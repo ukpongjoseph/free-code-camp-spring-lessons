@@ -19,14 +19,29 @@ import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 // @RequestMapping(value = "/test")
-public class FirstController {
+public class StudentController {
 
     private final StudentRepository repository;
 
-    public FirstController(StudentRepository studentRepository){
+    public StudentController(StudentRepository studentRepository){
         this.repository = studentRepository;
     }
     
+    public Student dtoToStudent(StudentDto dto){
+        Student student = new Student();
+        School school = new School();
+        school.setId(dto.schoolId());
+        student.setFirstname(dto.firstname());
+        student.setLastname(dto.lastname());
+        student.setEmail(dto.email());
+        student.setSchool(school);
+        return student;
+    }
+
+    public StudentResponseDto studentResponseDto(Student student){
+        return new StudentResponseDto(student.getFirstname(), student.getLastname(), student.getEmail());
+    }
+
     @GetMapping
     public String sayHello(){
         return "Hello from here";
@@ -51,11 +66,12 @@ public class FirstController {
     }
 
     @PostMapping(value = "/students/new")
-    public Student createStudent(
-        @RequestBody Student student
+    public StudentResponseDto createStudent(
+        @RequestBody StudentDto student
     ){
         if (student!=null) {
-            return repository.save(student);
+            Student studentResponse = repository.save(dtoToStudent(student));
+            return studentResponseDto(studentResponse);
         }else{
             return null;
         }

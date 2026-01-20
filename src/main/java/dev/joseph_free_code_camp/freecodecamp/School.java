@@ -2,6 +2,8 @@ package dev.joseph_free_code_camp.freecodecamp;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 // import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -18,6 +20,7 @@ public class School {
     private String name;
 
     @OneToMany(mappedBy = "school")
+    @JsonManagedReference
     private List<Student> students;
 
     
