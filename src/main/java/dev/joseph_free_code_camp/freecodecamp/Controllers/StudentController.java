@@ -1,4 +1,4 @@
-package dev.joseph_free_code_camp.freecodecamp;
+package dev.joseph_free_code_camp.freecodecamp.Controllers;
 
 import java.util.List;
 
@@ -14,33 +14,23 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 // import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.server.ResponseStatusException;
+// import org.springframework.web.server.ResponseStatusException;
+
+import dev.joseph_free_code_camp.freecodecamp.Dto.StudentDto;
+import dev.joseph_free_code_camp.freecodecamp.Dto.StudentResponseDto;
+import dev.joseph_free_code_camp.freecodecamp.Services.StudentService;
 
 
 @RestController
 // @RequestMapping(value = "/test")
 public class StudentController {
 
-    private final StudentRepository repository;
+    private StudentService studentService;
 
-    public StudentController(StudentRepository studentRepository){
-        this.repository = studentRepository;
+    public StudentController(StudentService studentService){
+        this.studentService = studentService;
     }
     
-    public Student dtoToStudent(StudentDto dto){
-        Student student = new Student();
-        School school = new School();
-        school.setId(dto.schoolId());
-        student.setFirstname(dto.firstname());
-        student.setLastname(dto.lastname());
-        student.setEmail(dto.email());
-        student.setSchool(school);
-        return student;
-    }
-
-    public StudentResponseDto studentResponseDto(Student student){
-        return new StudentResponseDto(student.getFirstname(), student.getLastname(), student.getEmail());
-    }
 
     @GetMapping
     public String sayHello(){
@@ -70,37 +60,36 @@ public class StudentController {
         @RequestBody StudentDto student
     ){
         if (student!=null) {
-            Student studentResponse = repository.save(dtoToStudent(student));
-            return studentResponseDto(studentResponse);
+            return studentService.saveStudent(student);
         }else{
             return null;
         }
     }
 
     @GetMapping(value = "/students")
-    public List<Student> allStudents(){
-        return repository.findAll();
+    public List<StudentResponseDto> allStudents(){
+        return studentService.fetchAllStudents();
     }
 
     @GetMapping(value = "/students/{student_id}")
-    public Student findStudentById(
+    public StudentResponseDto findStudentById(
         @PathVariable("student_id") int id
     ){
-        return repository.findById(id).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND, "Content Not Found"));
+        return studentService.fetchStudentById(id);
     }
     
     @GetMapping(value = "/students/search/{text}")
-    public List<Student> findStudentByName(
+    public List<StudentResponseDto> findStudentByName(
         @PathVariable("text") String text
     ){
-        return repository.findAllByFirstnameContaining(text);
+        return studentService.fetchStudentByNamme(text);
     }
 
     @DeleteMapping(value = "/students/{id}")
     public void deleteStudentById(
         @PathVariable("id") int id
     ){
-        repository.deleteById(id);
+        studentService.deleteAStudent(id);
     }
 
 

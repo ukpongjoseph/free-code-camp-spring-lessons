@@ -1,4 +1,4 @@
-package dev.joseph_free_code_camp.freecodecamp;
+package dev.joseph_free_code_camp.freecodecamp.Entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
