@@ -3,8 +3,12 @@ package dev.joseph_free_code_camp.freecodecamp.Controllers;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 // import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 // import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import dev.joseph_free_code_camp.freecodecamp.Dto.StudentDto;
 import dev.joseph_free_code_camp.freecodecamp.Dto.StudentResponseDto;
 import dev.joseph_free_code_camp.freecodecamp.Services.StudentService;
+import jakarta.validation.Valid;
 
 
 @RestController
@@ -57,7 +62,7 @@ public class StudentController {
 
     @PostMapping(value = "/students/new")
     public StudentResponseDto createStudent(
-        @RequestBody StudentDto student
+        @Valid  @RequestBody StudentDto student
     ){
         if (student!=null) {
             return studentService.saveStudent(student);
@@ -93,6 +98,12 @@ public class StudentController {
     }
 
 
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<?> exceptionHandler(MethodArgumentNotValidException err){
+        return ResponseEntity
+            .status(HttpStatus.BAD_REQUEST)
+            .body("Invalid request : " + err.getMessage());
+    }
 
 
 
