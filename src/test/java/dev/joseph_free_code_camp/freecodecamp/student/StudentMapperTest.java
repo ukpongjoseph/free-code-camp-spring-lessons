@@ -1,6 +1,7 @@
 package dev.joseph_free_code_camp.freecodecamp.student;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -40,11 +41,12 @@ public class StudentMapperTest {
         // We want to set SchoolId for the student object. First we need to create a school object, pass the school object to the student, then use the school object to set the school id from the dto, which is the test case data
         // passing the school object to the student
         secondDto.setSchool(school);
-        // getting the school object from the student and then passing the schoolId to the school object
+        // getting the school object from the student and then passing the schoolId to the school object 
         secondDto.getSchool().setId(dto.schoolId());
         assertEquals(firstDto.getFirstname(), secondDto.getFirstname());
         assertEquals(firstDto.getLastname(), secondDto.getLastname());
         assertEquals(firstDto.getEmail(), secondDto.getEmail());
         assertEquals(firstDto.getSchool().getId(), secondDto.getSchool().getId());
+        assertNotNull(secondDto);
     }
 }
