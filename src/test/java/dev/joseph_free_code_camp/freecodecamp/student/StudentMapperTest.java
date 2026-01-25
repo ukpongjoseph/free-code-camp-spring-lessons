@@ -2,6 +2,7 @@ package dev.joseph_free_code_camp.freecodecamp.student;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -48,5 +49,28 @@ public class StudentMapperTest {
         assertEquals(firstDto.getEmail(), secondDto.getEmail());
         assertEquals(firstDto.getSchool().getId(), secondDto.getSchool().getId());
         assertNotNull(secondDto);
+    }
+
+    @Test
+    public void studentResponseDtoTest(){
+        // Here we are converting from a Student object to a studentResponseDto. We will create a student object that will serve as a test case for this test
+        Student student = new Student("Abaga", "Michael", 34, "mike@gmail.com");
+        // After creating the student object, we will create the actual studentResponseDto using the mapper method
+        StudentResponseDto studentResponse = studentMapper.studentResponseDto(student);
+        // After creating the actual value, we will be creating the expected studentResponse using our manual method
+        // First is to declare a StudentResponseDto instance
+        StudentResponseDto responseDto;
+        // We then analyze what should be contained in the StudentResponseDto. It should include firstname, lastname, email. All these values will be gottend from the Student object using getters
+        responseDto = new StudentResponseDto(student.getFirstname(), student.getLastname(), student.getEmail());
+        // Now that we have both the expected value (studentResponse) and the actual value (responseDto), we will compare using the assertEqual method
+        assertEquals(studentResponse, responseDto);
+    }
+
+    // The test below is to check or test for exception, precisely a nullPointerException when a null dto is passed to the studentMapper
+    @Test
+    public void dtoToStudentNullPointerExceptionTest(){
+        // In this test, we plan to recieve a null dto as test case, pass it to the studentMapper method to get an Exception (NullPointer Eception) as the expected response. We then plan to compare this expected outcome with a custom NullPointer exception class via the assertThrows method which expects two parameters, the expected type (In this case a nullPointerException.class) and the executable (more like a function and this can be achieved using a lambda expression or a functional interface)
+        assertThrows(NullPointerException.class, () -> studentMapper.dtoToStudent(null));
+
     }
 }
