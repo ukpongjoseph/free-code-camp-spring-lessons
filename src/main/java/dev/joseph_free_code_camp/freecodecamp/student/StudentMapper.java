@@ -1,11 +1,8 @@
-package dev.joseph_free_code_camp.freecodecamp.Mappers;
+package dev.joseph_free_code_camp.freecodecamp.student;
 
 import org.springframework.stereotype.Service;
 
-import dev.joseph_free_code_camp.freecodecamp.Dto.StudentDto;
-import dev.joseph_free_code_camp.freecodecamp.Dto.StudentResponseDto;
-import dev.joseph_free_code_camp.freecodecamp.Entity.School;
-import dev.joseph_free_code_camp.freecodecamp.Entity.Student;
+import dev.joseph_free_code_camp.freecodecamp.school.School;
 
 @Service
 public class StudentMapper {

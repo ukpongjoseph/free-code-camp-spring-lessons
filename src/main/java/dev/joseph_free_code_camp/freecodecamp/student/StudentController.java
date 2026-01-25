@@ -1,9 +1,9 @@
-package dev.joseph_free_code_camp.freecodecamp.Controllers;
+package dev.joseph_free_code_camp.freecodecamp.student;
 
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
+// import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 // import org.springframework.http.ResponseEntity;
@@ -20,9 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 // import org.springframework.web.bind.annotation.RequestParam;
 // import org.springframework.web.server.ResponseStatusException;
 
-import dev.joseph_free_code_camp.freecodecamp.Dto.StudentDto;
-import dev.joseph_free_code_camp.freecodecamp.Dto.StudentResponseDto;
-import dev.joseph_free_code_camp.freecodecamp.Services.StudentService;
 import jakarta.validation.Valid;
 
 

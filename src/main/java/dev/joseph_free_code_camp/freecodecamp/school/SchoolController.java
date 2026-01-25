@@ -1,12 +1,8 @@
-package dev.joseph_free_code_camp.freecodecamp.Controllers;
+package dev.joseph_free_code_camp.freecodecamp.school;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import dev.joseph_free_code_camp.freecodecamp.Dto.SchoolDto;
-import dev.joseph_free_code_camp.freecodecamp.Dto.SchoolResponseDto;
-import dev.joseph_free_code_camp.freecodecamp.Services.SchoolService;
 
 import java.util.List;
 // import java.util.stream.Collectors;

@@ -1,8 +1,6 @@
-package dev.joseph_free_code_camp.freecodecamp.Repositories;
+package dev.joseph_free_code_camp.freecodecamp.school;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-
-import dev.joseph_free_code_camp.freecodecamp.Entity.School;
 
 public interface SchoolRepository extends JpaRepository<School, Integer> {
     

@@ -1,9 +1,10 @@
-package dev.joseph_free_code_camp.freecodecamp.Entity;
+package dev.joseph_free_code_camp.freecodecamp.school;
 
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import dev.joseph_free_code_camp.freecodecamp.student.Student;
 // import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

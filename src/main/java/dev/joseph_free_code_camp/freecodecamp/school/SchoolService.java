@@ -1,15 +1,9 @@
-package dev.joseph_free_code_camp.freecodecamp.Services;
+package dev.joseph_free_code_camp.freecodecamp.school;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
-
-import dev.joseph_free_code_camp.freecodecamp.Dto.SchoolDto;
-import dev.joseph_free_code_camp.freecodecamp.Dto.SchoolResponseDto;
-import dev.joseph_free_code_camp.freecodecamp.Entity.School;
-import dev.joseph_free_code_camp.freecodecamp.Mappers.SchoolMapper;
-import dev.joseph_free_code_camp.freecodecamp.Repositories.SchoolRepository;
 
 @Service
 public class SchoolService {

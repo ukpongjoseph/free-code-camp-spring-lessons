@@ -1,5 +1,6 @@
-package dev.joseph_free_code_camp.freecodecamp.Entity;
+package dev.joseph_free_code_camp.freecodecamp.studentProfile;
 
+import dev.joseph_free_code_camp.freecodecamp.student.Student;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;

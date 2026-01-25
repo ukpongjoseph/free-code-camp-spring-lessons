@@ -1,7 +1,9 @@
-package dev.joseph_free_code_camp.freecodecamp.Entity;
+package dev.joseph_free_code_camp.freecodecamp.student;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import dev.joseph_free_code_camp.freecodecamp.school.School;
+import dev.joseph_free_code_camp.freecodecamp.studentProfile.StudentProfile;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

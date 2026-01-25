@@ -1,4 +1,4 @@
-package dev.joseph_free_code_camp.freecodecamp.Services;
+package dev.joseph_free_code_camp.freecodecamp.student;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -6,12 +6,6 @@ import java.util.stream.Collectors;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-
-import dev.joseph_free_code_camp.freecodecamp.Dto.StudentDto;
-import dev.joseph_free_code_camp.freecodecamp.Dto.StudentResponseDto;
-import dev.joseph_free_code_camp.freecodecamp.Entity.Student;
-import dev.joseph_free_code_camp.freecodecamp.Mappers.StudentMapper;
-import dev.joseph_free_code_camp.freecodecamp.Repositories.StudentRepository;
 
 @Service
 public class StudentService {
