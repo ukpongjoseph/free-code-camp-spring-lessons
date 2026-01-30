@@ -131,9 +131,12 @@ public class StudentServiceTest {
             return new StudentResponseDto(actualStudent.getFirstname(), actualStudent.getLastname(), actualStudent.getEmail());
         });
 
-        assertEquals(expectedResponseDto.size(), expectedResponseDto.size());
-        assertEquals(expectedResponseDto.get(0), expectedResponseDto.get(0));
-        assertEquals(expectedResponseDto.get(0).firstname(), expectedResponseDto.get(0).firstname());
+        List<StudentResponseDto> actualResponseDto = studentService.fetchStudentByNamme("Joseph");
+        assertEquals(expectedResponseDto.size(), actualResponseDto.size());
+        assertEquals(expectedResponseDto.get(0), actualResponseDto.get(0));
+        assertEquals(expectedResponseDto.get(0).firstname(), actualResponseDto.get(0).firstname());
+
+        verify(studentRepository,times(1)).findAllByFirstnameContaining("Joseph");
     }
 }
 
