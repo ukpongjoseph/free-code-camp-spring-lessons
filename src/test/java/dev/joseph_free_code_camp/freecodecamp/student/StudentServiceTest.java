@@ -8,6 +8,7 @@ import static org.mockito.Mockito.verify;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -88,6 +89,51 @@ public class StudentServiceTest {
         assertEquals(studentResponseDtos.getLast(), actualStudentResponseDtos.getLast());
         assertEquals(studentResponseDtos.get(0), actualStudentResponseDtos.get(0));
         assertEquals(studentResponseDtos.get(0).email(), actualStudentResponseDtos.get(0).email());
+
+        verify(studentRepository, times(1)).findAll();
+    }
+
+    @Test
+    public void findAStudentByIdTest(){
+        // We would first Find the student By Id, this will return a optional student object. This student object is converted to studentResponseDto via the mapper
+
+        // The controlled output for repository.findStudentByid
+        Student expecStudent = new Student("Joseph", "Aniekan", 24, "anie@gmail.com");
+        // The expected return value of the service method call
+        StudentResponseDto exResponseDto = new StudentResponseDto(expecStudent.getFirstname(), expecStudent.getLastname(), expecStudent.getEmail());
+
+        // When the repository find by id, it returns an optional student object which is why we use the Optional.of(studentObject) in the mocked method return value
+        when(studentRepository.findById(1)).thenReturn(Optional.of(expecStudent));
+        // The optional student object is then passed to the mapper
+        when(studentMapper.studentResponseDto(expecStudent)).thenReturn(exResponseDto);
+
+        // when we run this method, we inject mock and use the controlled output returned by the mock to give this method call a value
+        StudentResponseDto actualStudent = studentService.fetchStudentById(1);
+
+        assertEquals(exResponseDto.email(), actualStudent.email());
+
+        verify(studentRepository, times(1)).findById(1); 
+    }
+
+    @Test
+    public void findStudentByNameTest(){
+        // This test involves the studentrepository findAStudentName by recieving a query text, return a List of student object. These stuednt object is then converted to a studentResponseDto object via the mapper when this List is mapped
+
+        // This is our control output for when our mock studentRepository findAStudentByName . This control output is passed to the mapper to get a responseDto wihich will be compared to the expected responseDto
+        List<Student> student = Arrays.asList(new Student("Joseph", "Aniekan", 24, "joe@gmail.com"));
+
+        // The expected responseDto
+        List<StudentResponseDto> expectedResponseDto = Arrays.asList(new StudentResponseDto("Joseph", "Aniekan", "joe@gmail.com"));
+
+        when(studentRepository.findAllByFirstnameContaining("Joseph")).thenReturn(student);
+        when(studentMapper.studentResponseDto(any(Student.class))).thenAnswer(invocator ->{
+            Student actualStudent = invocator.getArgument(0);
+            return new StudentResponseDto(actualStudent.getFirstname(), actualStudent.getLastname(), actualStudent.getEmail());
+        });
+
+        assertEquals(expectedResponseDto.size(), expectedResponseDto.size());
+        assertEquals(expectedResponseDto.get(0), expectedResponseDto.get(0));
+        assertEquals(expectedResponseDto.get(0).firstname(), expectedResponseDto.get(0).firstname());
     }
 }
 
